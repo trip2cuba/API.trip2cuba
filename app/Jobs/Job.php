@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace ApiTripCuba\Jobs;
 
 use Illuminate\Bus\Queueable;
 

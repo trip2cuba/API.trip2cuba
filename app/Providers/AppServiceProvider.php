@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace ApiTripCuba\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
