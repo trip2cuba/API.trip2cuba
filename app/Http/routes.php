@@ -29,3 +29,8 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+
+Route::group(array('prefix' => 'api/v1.0'),function(){
+	Route::resource('user', 'UserController');
+});
