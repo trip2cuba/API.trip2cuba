@@ -28,6 +28,11 @@ return [
     */
 
     'grant_types' => [
+        'password' => [
+        'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
+        'callback' => '\ApiTripCuba\GrantTypes\PasswordGrantVerifier@verify',
+        'access_token_ttl' => 3600
+    ]
 
     ],
 

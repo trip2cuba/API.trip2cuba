@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(ApiTripCuba\User::class, function (Faker\Generator $faker) {
+$factory->define(ApiTripCuba\Entities\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

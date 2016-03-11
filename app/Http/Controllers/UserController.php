@@ -36,7 +36,7 @@ class UserController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request)
-	{
+	{//usar el grant_type client_credentials para poder crear el usuario
 
 		if(!$request->input('first_name') || ! $request->input('last_name') || ! $request->input('email') || ! $request->input('password') || ! $request->input('last_name'))
 		{
@@ -58,10 +58,10 @@ class UserController extends Controller
 	public function show($id)
 	{
 		$user = User::find($id);
-
+		
 		if(!$user)
 		{
-			return response()->json(['mensaje' => 'No se encuentra este usurio', 'codigo' => 404],404);
+			return response()->json(['mensaje' => 'No se encuentra este usuario', 'codigo' => 404],404);
 		}
 
 		return response()->json(['data' => $user],200);

@@ -31,6 +31,10 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-Route::group(array('prefix' => 'api/v1.0'),function(){
+Route::group(array('prefix' => 'api/v1.0','middleware' => 'oauth'),function(){
 	Route::resource('user', 'UserController');
+});
+
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
 });

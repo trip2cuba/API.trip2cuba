@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => ApiTripCuba\User::class,
+        'model' => ApiTripCuba\Entities\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

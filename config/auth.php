@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => ApiTripCuba\User::class,
+            'model' => ApiTripCuba\Entities\User::class,
         ],
 
         // 'users' => [
