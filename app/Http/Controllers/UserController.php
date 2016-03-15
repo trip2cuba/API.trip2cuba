@@ -5,6 +5,12 @@ namespace ApiTripCuba\Http\Controllers;
 use Illuminate\Http\Request;
 use ApiTripCuba\Entities\User;
 use ApiTripCuba\Http\Requests;
+use ApiTripCuba\Transformers\UserTransformer;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+
 
 class UserController extends Controller
 {
@@ -21,13 +27,16 @@ class UserController extends Controller
 	public function index()
 	{
 		//Solo los administradores pueden tener acceso a la lista de usuario
-		/*$fabricantes = Cache::remember('fabricantes', 15/60, function()
-			{
-				return Fabricante::simplePaginate(15);
-			});
+		/*$fractal = new Manager();
+        $paginator = userr::name($request->name)
+                        ->last_name($request->last_name)
+                        ->email($request->email)
+                        ->paginate(20);
+        $user = $paginator->getCollection();
 
-
-		return response()->json(['siguiente' => $fabricantes->nextPageUrl(), 'anterior' => $fabricantes->previousPageUrl(), 'datos' => $fabricantes->items()],200);*/
+        $resource = new Collection($user, new UserTransformer);
+        $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
+        return response($fractal->createData($resource)->toArray());*/
 	}
 
 	/**
@@ -57,14 +66,16 @@ class UserController extends Controller
 	 */
 	public function show($id)
 	{
-		$user = User::find($id);
-		
-		if(!$user)
+
+		$fractal = new Manager();
+        $user = User::find($id);
+        if(!$user)
 		{
 			return response()->json(['mensaje' => 'No se encuentra este usuario', 'codigo' => 404],404);
 		}
+        $resource = new Item($user, new UserTransformer);
+        return response($fractal->createData($resource)->toArray());
 
-		return response()->json(['data' => $user],200);
 	}
 
 	/**

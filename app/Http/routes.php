@@ -30,11 +30,13 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
+Route::group(['middleware' => 'cors'], function () {
+	Route::group(array('prefix' => 'api/v1.0','middleware' => 'oauth'),function(){
+		Route::resource('user', 'UserController');
+	});
 
-Route::group(array('prefix' => 'api/v1.0','middleware' => 'oauth'),function(){
-	Route::resource('user', 'UserController');
-});
+	Route::post('oauth/access_token', function() {
+    	return Response::json(Authorizer::issueAccessToken());
+	});
 
-Route::post('oauth/access_token', function() {
-    return Response::json(Authorizer::issueAccessToken());
 });
